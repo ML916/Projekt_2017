@@ -1,7 +1,5 @@
 package com.javaproject2017_server;
 
-import sample.CorridorMap;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
