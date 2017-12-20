@@ -17,24 +17,19 @@ public class SimulationClientListenerThread extends Thread {
     @Override
     public void run(){
         while(connectionActive){
-            ObjectInputStream in = null;
-            ObjectOutputStream out = null;
+            ObjectInputStream objectInputStream = null;
+            ObjectOutputStream objectOutputStream = null;
             try {
-                out = new ObjectOutputStream(clientSocket.getOutputStream());
-                in = new ObjectInputStream(clientSocket.getInputStream());
-                /*Pedestrian p1 = new Pedestrian(2,4);
-                Pedestrian p2 = new Pedestrian(6,6);
-                ArrayList<Pedestrian> pedestrians = new ArrayList<>();
-                pedestrians.add(p1);
-                pedestrians.add(p2);
-                */
-
                 //TODO: Simulering implementeras här innanför på något sätt
-
-                out.writeObject(corridorMap);
-                out.flush();
+                objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
+                objectOutputStream.writeObject(corridorMap);
+                objectOutputStream.flush();
+                //objectOutputStream.close();
                 System.out.println("Object sent");
-                corridorMap = (CorridorMap) in.readObject();
+
+                objectInputStream = new ObjectInputStream(clientSocket.getInputStream());
+                corridorMap = (CorridorMap) objectInputStream.readObject();
+
 
 
             } catch (IOException e) {

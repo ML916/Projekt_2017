@@ -12,16 +12,17 @@ public class Client {
         try {
             socket = new Socket("localhost", 11111);
             while(true) {
-                ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
-                CorridorMap receivedMap = (CorridorMap) in.readObject();
+                ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+                CorridorMap receivedMap = (CorridorMap) objectInputStream.readObject();
+                //objectInputStream.close();
                 for (Pedestrian p: receivedMap.pedestrians) {
                     p.move(receivedMap);
                 }
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
                 objectOutputStream.writeObject(receivedMap);
                 objectOutputStream.flush();
+                //objectOutputStream.close();
 
-                System.out.println(receivedMap.getHeight());
 
             }
         } catch (IOException e) {
