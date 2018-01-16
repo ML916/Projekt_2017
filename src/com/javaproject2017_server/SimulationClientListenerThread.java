@@ -9,32 +9,29 @@ import java.util.List;
 
 public class SimulationClientListenerThread extends Thread {
     Socket clientSocket;
-    private ObjectInputStream in;
-    private ObjectOutputStream out;
+    private ObjectInputStream objectInputStream;
+    private ObjectOutputStream objectOutputStream;
     private CorridorMap corridorMap;
     public boolean connectionActive = true;
 
     @Override
     public void run(){
         while(connectionActive){
-            ObjectInputStream objectInputStream = null;
-            ObjectOutputStream objectOutputStream = null;
             try {
-                //TODO: Simulering implementeras här innanför på något sätt
+                this.sleep(200);
+                corridorMap.pedestrians.forEach(pedestrian -> pedestrian.move(corridorMap));
                 objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
                 objectOutputStream.writeObject(corridorMap);
-                objectOutputStream.flush();
-                //objectOutputStream.close();
+                //objectOutputStream.flush();
                 System.out.println("Object sent");
 
                 objectInputStream = new ObjectInputStream(clientSocket.getInputStream());
                 corridorMap = (CorridorMap) objectInputStream.readObject();
-
-
-
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             //System.out.println("Tråden rullar");

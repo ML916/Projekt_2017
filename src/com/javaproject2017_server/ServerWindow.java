@@ -17,13 +17,13 @@ public class ServerWindow extends Application {
 
         ServerController controller = fxmlLoader.getController();
         ArrayList<Pedestrian> pedestrians = new ArrayList();
-        Pedestrian p1 = new Pedestrian(50,50);
-        Pedestrian p2 = new Pedestrian(40,40);
-        Pedestrian p3 = new Pedestrian(80,70);
+        Pedestrian p1 = new Pedestrian(150,50,1);
+        Pedestrian p2 = new Pedestrian(40,240,2);
+        Pedestrian p3 = new Pedestrian(180,70,3);
         pedestrians.add(p1);
         pedestrians.add(p2);
         pedestrians.add(p3);
-        CorridorMap corridorMap = new CorridorMap(600, 200,pedestrians);
+        CorridorMap corridorMap = new CorridorMap(600, 200, pedestrians);
         SimulationServer simulationServer = new SimulationServer(corridorMap);
         controller.initModel(simulationServer);
 

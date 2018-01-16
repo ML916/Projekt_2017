@@ -22,8 +22,6 @@ public class Client {
                 objectOutputStream.writeObject(receivedMap);
                 objectOutputStream.flush();
                 //objectOutputStream.close();
-
-
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,5 +1,10 @@
 package com.javaproject2017_server;
 
+
+
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,13 +12,17 @@ import java.util.List;
 public class Pedestrian implements Serializable {
     private double x, y;
     private double goalCoordinate;
+    public final int id;
     private transient Perception perception;
     private double defaultDirectionX;
     private double defaultDirectionY;
+    //public Circle figureOnMap;
 
-    public Pedestrian(double x, double y){
+    public Pedestrian(double x, double y, int pedestrianID){
         this.x = x;
         this.y = y;
+        this.id = pedestrianID;
+        //figureOnMap = new Circle(x,y,5.0,  Color.RED);
         defaultDirectionY = 4;
         /*if(this.x > this.perception.getCorridorMap().width / 2) {
             goalCoordinate = 0;
@@ -23,6 +32,23 @@ public class Pedestrian implements Serializable {
             goalCoordinate = this.perception.getCorridorMap().width;
             defaultDirectionX = -4;
         }*/
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null){
+            return false;
+        }
+        if(!Pedestrian.class.isAssignableFrom(obj.getClass())){
+            return false;
+        }
+        final Pedestrian other = (Pedestrian) obj;
+        if(this.id == other.id){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public double getX(){
